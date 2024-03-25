@@ -1,6 +1,6 @@
 <template>
   <div id="create" class="w-72 mx-auto">
-    <form @submit="createUser" class="flex flex-col gap-4">
+    <form @submit="submitForm" class="flex flex-col gap-4">
       <label for="username">Username:</label>
       <input type="text" class="border p-1" id="username" v-model="username" required>
       
@@ -25,6 +25,17 @@ export default {
     };
   },
   methods: {
+    submitForm(event) {
+      event.preventDefault();
+
+      const user = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      };
+
+      this.createUser(user);
+    },
     async createUser(user) {
       try {
         const response = await fetch('http://localhost:3000/users/create', {
