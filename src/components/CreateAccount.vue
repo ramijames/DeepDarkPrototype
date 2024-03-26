@@ -7,7 +7,7 @@
       <p class="text-white text-center rounded bg-green-500 w-full p-2 mb-4">User created successfully</p>
     </div>
 
-    <form v-if="showform" @submit="submitForm" class="flex flex-col gap-4">
+    <form v-if="!userStore.user" @submit="submitForm" class="flex flex-col gap-4">
       <label for="username">Username:</label>
       <input type="text" class="border p-1" id="username" v-model="username" required>
       
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { useUserStore } from '../stores/store.js';
+
 export default {
   data() {
     return {
@@ -33,6 +35,15 @@ export default {
       response: null,
       showform: true,
       error: null
+    };
+  },
+  setup() {
+    const userStore = useUserStore();
+
+    console.log(userStore.user);
+
+    return {
+      userStore
     };
   },
   methods: {
