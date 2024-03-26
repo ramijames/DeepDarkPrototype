@@ -7,7 +7,7 @@
       <p class="text-white text-center rounded bg-green-500 w-full p-2 mb-4">User created successfully</p>
     </div>
 
-    <form v-if="!userStore.user" @submit="submitForm" class="flex flex-col gap-4">
+    <form v-if="!userStore.user" @submit="submitCreateUserForm" class="flex flex-col gap-4">
       <label for="username">Username:</label>
       <input type="text" class="border p-1" id="username" v-model="username" required>
       
@@ -19,6 +19,17 @@
       
       <button type="submit" class="w-full bg-black text-white py-4 rounded mt-4">Submit</button>
     </form>
+
+    <!-- Show user details if logged in -->
+    <div v-if="userStore.user" class="flex flex-col gap-4">
+      <p>Username: {{ userStore.user.username }}</p>
+      <p>Email: {{ userStore.user.email }}</p>
+    </div>
+
+    <!-- Log out button that points to /auth/logout -->
+    <div v-if="userStore.user" class="flex flex-col gap-4">
+      <button @click="logout" class="w-full bg-black text-white py-4 rounded mt-4">Log out</button>
+    </div>
   </div>
 </template>
 
@@ -40,14 +51,14 @@ export default {
   setup() {
     const userStore = useUserStore();
 
-    console.log(userStore.user);
+    console.log('User state: ' + userStore.user);
 
     return {
       userStore
     };
   },
   methods: {
-    submitForm(event) {
+    submitCreateUserForm(event) {
       event.preventDefault();
 
       const user = {
@@ -77,9 +88,31 @@ export default {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
         } else {
+          // User is created succcesfully on the server
+          // We can now update the userStore with the new user
+          this.userStore.setUser(user);
+          console.log(this.userStore.user);
           const userData = await response.json();
           this.notification = `User ${userData.username} was successfully created!`;
           this.showform = false;
+        }
+
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+    async logout() {
+      try {
+        const response = await fetch('http://localhost:3000/auth/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          this.userStore.setUser(null);
+          this.notification = null;
         }
 
       } catch (error) {
