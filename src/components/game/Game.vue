@@ -9,11 +9,12 @@
       <LogOut />
     </div>
     <div v-if="userStore.user" class="flex flex-col text-white text-center p-6 w-full h-full border-8 border-crt-4 border-double justify-center h-full">
-      Home view. Will show: 
+      <router-view></router-view>
+      <!-- Home view. Will show: 
       <ul class="w-44 mx-auto text-left">
         <li class="list-disc">user leaderboard</li>
         <li class="list-disc">popular dungeons</li>
-      </ul>
+      </ul> -->
     </div>
 
     <!-- If the user is not logged in, redirect to the auth view -->

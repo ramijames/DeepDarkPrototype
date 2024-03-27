@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AuthView from '../views/AuthView.vue'
 import GameView from '../views/GameView.vue'
+  import Rankings from '../components/game/Rankings.vue'
+  import Characters from '../components/game/Characters.vue'
+  import Dungeonforge from '../components/game/Dungeonforge.vue'
+  import Adventure from '../components/game/Adventure.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,16 +23,30 @@ const router = createRouter({
     {
       path: '/game',
       name: 'game',
-      component: GameView
+      component: GameView,
+      children: [
+        {
+          path: 'rankings',
+          name: 'rankings',
+          component: () => import('../components/game/Rankings.vue')
+        },
+        {
+          path: 'characters',
+          name: 'characters',
+          component: () => import('../components/game/Characters.vue')
+        },
+        {
+          path: 'dungeonforge',
+          name: 'dungeonforge',
+          component: () => import('../components/game/Dungeonforge.vue')
+        },
+        {
+          path: 'adventure',
+          name: 'adventure',
+          component: () => import('../components/game/Adventure.vue')
+        }
+      ]
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
   ]
 })
 

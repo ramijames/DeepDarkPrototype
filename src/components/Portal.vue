@@ -25,15 +25,27 @@ import {
 
 const portal = [
   {
-    name: "Player",
-    description: "Show us who you really are",
-    href: "/player",
+    name: "Rankings",
+    description: "The best of the best",
+    href: "/game/rankings",
     icon: null,
   },
   {
-    name: "Dungeoncraft",
-    description: "Create dungeons for other players",
-    href: "/dungeon/craft",
+    name: "Characters",
+    description: "Show us who you really are",
+    href: "/game/characters",
+    icon: null,
+  },
+  {
+    name: "Dungeonforge",
+    description: "Create dungeons and compete in the rankings",
+    href: "/game/dungeonforge",
+    icon: null,
+  },
+  {
+    name: "Adventure",
+    description: "Enter the dungeon and fight monsters",
+    href: "/game/adventure",
     icon: null,
   },
 ];

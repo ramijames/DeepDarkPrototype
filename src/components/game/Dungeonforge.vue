@@ -1,0 +1,13 @@
+<template>
+  <main>Dungeonforge</main>
+</template>
+
+<script>
+
+export default {
+  setup() {
+    return {};
+  }
+};
+
+</script>
