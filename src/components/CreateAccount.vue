@@ -113,6 +113,7 @@ export default {
         if (response.ok) {
           this.userStore.setUser(null);
           this.notification = null;
+          this.showform = true;
         }
 
       } catch (error) {

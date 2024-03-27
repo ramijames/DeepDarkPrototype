@@ -9,8 +9,14 @@ export const useUserStore = defineStore({
   }),
   actions: {
     setUser(user) {
-      this.user = user;
-      localStorage.setItem('user', JSON.stringify(user));
+      if (user) {
+        const { email, username } = user;
+        this.user = { email, username };
+        localStorage.setItem('user', JSON.stringify({ email, username }));
+      } else {
+        this.user = null;
+        localStorage.removeItem('user');
+      }
     },
     setState(state) {
       this.state = state;
