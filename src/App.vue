@@ -21,7 +21,7 @@
 </script>
 
 <template>
-  <main class="h-full w-full bg-crt-0">
+  <main class="h-full w-full bg-crt-0 p-6">
     <RouterView />
   </main>
 </template>

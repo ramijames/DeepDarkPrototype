@@ -6,6 +6,7 @@
 
 <script>
 import { useUserStore } from '@/stores/store.js';
+import { useRouter } from 'vue-router';
 
 export default {
   data() {
@@ -15,11 +16,12 @@ export default {
   },
   setup() {
     const userStore = useUserStore();
-
+    const router = useRouter();
     console.log('User state: ' + userStore.user);
 
     return {
-      userStore
+      userStore,
+      router
     };
   },
   methods: {
@@ -36,6 +38,7 @@ export default {
           this.userStore.setUser(null);
           this.notification = null;
           this.showform = true;
+          this.router.push('/auth');
         }
 
       } catch (error) {

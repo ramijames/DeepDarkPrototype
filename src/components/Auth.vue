@@ -1,6 +1,6 @@
 <template>
   <div id="auth" class="w-full h-full relative">
-    <LogOut />
+
 
     <div v-if="!userStore.user" @click="toggleForm" class="w-full md:w-1/2 flex flex-row mx-auto">
       <div class="cursor-pointer w-1/2 border-r-0 border-crt-4 border-4 text-black text-center py-2 text-white" :class="loggingin ? '' : 'bg-crt-4'">Create Account</div>
@@ -30,16 +30,18 @@
 </template>
 
 <script>
+import { watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { useUserStore } from '../stores/store.js';
 import CreateAccountForm from './CreateAccountForm.vue';
 import LoginForm from './LoginForm.vue';
-import LogOut from './LogOut.vue';
+
 
 /* 
 
 The auth module checks whether the user has 
-an account, is logged in, and if yes, shows 
-the user a profil of their information.
+an account, is logged in, and if yes, forwards
+them on to the game.
 
 At its highest level, the auth module is
 is an access manager.
@@ -72,8 +74,18 @@ export default {
   },
   setup() {
     const userStore = useUserStore();
+    const router = useRouter();
 
     console.log('User state: ' + userStore.user);
+
+    // If the user is logged in, redirect them to the game
+    // This should be a watcher on the userStore.user property
+    watch(() => userStore.user, (newUser) => {
+      if (newUser) {
+        router.push('/game');
+      }
+    }, { immediate: true });
+
 
     return {
       userStore
@@ -86,8 +98,7 @@ export default {
   },
   components: {
     CreateAccountForm,
-    LoginForm,
-    LogOut
+    LoginForm
   }
 };
 </script>

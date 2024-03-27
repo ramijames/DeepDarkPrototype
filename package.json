@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.19",
     "pinia": "^2.1.7",
     "value-noise-js": "^1.2.6",
     "vue": "^3.4.21",
