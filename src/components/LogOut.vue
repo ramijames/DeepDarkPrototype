@@ -1,7 +1,5 @@
 <template>
-  <div v-if="userStore.user" class="absolute top-0 right-0">
-    <button @click="logout" class="px-12 bg-crt-4 text-white py-2">Log out</button>
-  </div>
+  <button v-if="userStore.user" @click="logout" class="absolute w-full bottom-0 bg-crt-8 text-white py-2">Log out</button>
 </template>
 
 <script>

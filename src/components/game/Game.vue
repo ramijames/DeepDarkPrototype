@@ -1,15 +1,22 @@
 <template>
-  <main class="p-6 relative w-full h-full">
+  <main class="relative w-full h-full flex flex-row">
     <!-- Check if the user is logged in -->
-    <div v-if="userStore.user">
-      <Portal />
+    <div v-if="userStore.user" class="relative border-4 b-crt-4 h-full w-1/5">
+      <div class="p-6">
+        <div class="text-crt-4">Hello, {{ userStore.user.username }}</div>
+        <Portal />
+      </div>
       <LogOut />
-      <div class="text-white text-center text-7xl p-6 w-full h-full">Game View</div>
+    </div>
+    <div v-if="userStore.user" class="text-white text-center text-7xl p-6 w-full h-full">
+      Game View
     </div>
 
     <!-- If the user is not logged in, redirect to the auth view -->
-    <div v-else>
-      <router-link to="/auth" class="text-white text-center text-7xl p-6 w-full h-full">Please log in</router-link>
+    <div v-if="!userStore.user" class="flex flex-col justify-center w-full h-full bg-crt-4">
+      <img src="/balrog.png" alt="Balrog" class="w-1/3 mx-auto" />
+      <h1 class="text-7xl text-crt-0 text-center">You shall not pass!</h1>
+      <router-link to="/auth" class="text-crt-0 underline text-center">Please log in</router-link>
     </div>
 
     
