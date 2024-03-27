@@ -21,13 +21,15 @@
 </script>
 
 <template>
-  <main class="h-full w-full">
+  <main class="h-full w-full bg-crt-0">
     <RouterView />
   </main>
 </template>
 
 
-<style scoped>
-
+<style>
+html, body, #app {
+  height:100%;
+}
 </style>
 
