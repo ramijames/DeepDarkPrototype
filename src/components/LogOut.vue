@@ -1,6 +1,6 @@
 <template>
   <div v-if="userStore.user" class="absolute top-0 right-0">
-    <button @click="logout" class="px-12 bg-black text-white py-2 rounded">Log out</button>
+    <button @click="logout" class="px-12 bg-crt-4 text-white py-2">Log out</button>
   </div>
 </template>
 

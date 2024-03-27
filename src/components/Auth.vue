@@ -2,12 +2,12 @@
   <div id="auth" class="w-full h-full relative">
     <LogOut />
 
-    <div v-if="!userStore.user" class="h-full w-96 mx-auto flex flex-col justify-center">
-      <!-- Two links to switch between create account and login -->
-      <div class="flex flex-row mb-8">
-        <div @click="showCreateForm" class="cursor-pointer w-1/2 border-r-0 border-crt-4 border-4 text-black text-center py-2 text-white" :class="loggedout ? 'bg-crt-4' : ''">Create Account</div>
-        <div @click="showLoginForm" class="cursor-pointer w-1/2 border-crt-4 border-4 border text-center py-2 text-white" :class="loggedout ? '' : 'bg-crt-4'">Login</div>
-      </div>
+    <div v-if="!userStore.user" @click="toggleForm" class="w-full md:w-1/2 flex flex-row mx-auto">
+      <div class="cursor-pointer w-1/2 border-r-0 border-crt-4 border-4 text-black text-center py-2 text-white" :class="loggingin ? '' : 'bg-crt-4'">Create Account</div>
+      <div class="cursor-pointer w-1/2 border-crt-4 border-4 border text-center py-2 text-white" :class="loggingin ? 'bg-crt-4' : ''">Login</div>
+    </div>
+    <!-- If the user isn't logged in, show switcher and forms -->
+    <div v-if="!userStore.user" class="h-full w-full md:w-1/2 mx-auto flex flex-col justify-center">
 
       <div v-if="notification && response && !response.ok">
         <p class="text-white text-center rounded bg-red-500 w-full p-2 mb-4">{{ error }}</p>
@@ -16,7 +16,8 @@
         <p class="text-white text-center rounded bg-green-500 w-full p-2 mb-4">User created successfully</p>
       </div>
 
-      <LoginForm />
+      <LoginForm v-if="loggingin" />
+      <CreateAccountForm v-else />
     </div>
     
 
@@ -30,6 +31,7 @@
 
 <script>
 import { useUserStore } from '../stores/store.js';
+import CreateAccountForm from './CreateAccountForm.vue';
 import LoginForm from './LoginForm.vue';
 import LogOut from './LogOut.vue';
 
@@ -64,7 +66,8 @@ export default {
       response: null,
       showform: true,
       error: null,
-      loggedout: true
+      loggedout: true,
+      loggingin: false
     };
   },
   setup() {
@@ -76,7 +79,13 @@ export default {
       userStore
     };
   },
+  methods: {
+    toggleForm() {
+      this.loggingin = !this.loggingin;
+    }
+  },
   components: {
+    CreateAccountForm,
     LoginForm,
     LogOut
   }

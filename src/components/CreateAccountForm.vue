@@ -1,7 +1,10 @@
 <template>
-  <form v-if="!userStore.user" @submit="submitLoginForm" class="flex flex-col gap-1">
+  <form v-if="!userStore.user" @submit="submitCreateUserForm" class="flex flex-col gap-1">
     <label for="username" class="text-crt-4">Username:</label>
-    <input type="text" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" id="username" v-model="username" placeholder="Pick a username" required>    
+    <input type="text" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" id="username" v-model="username" placeholder="Pick a username" required>
+    
+    <label for="email" class="text-crt-4">Email:</label>
+    <input type="email" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" placeholder="Your email address" id="email" v-model="email" required>
     
     <label for="password" class="text-crt-4">Password:</label>
     <input type="password" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" id="password" v-model="password" required>
@@ -36,7 +39,7 @@ export default {
     };
   },
   methods: {
-    submitLoginForm(event) {
+    submitCreateUserForm(event) {
       event.preventDefault();
 
       const user = {
@@ -45,11 +48,11 @@ export default {
         password: this.password
       };
 
-      this.loginUser(user);
+      this.createUser(user);
     },
-    async loginUser(user) {
+    async createUser(user) {
       try {
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('http://localhost:3000/users/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
