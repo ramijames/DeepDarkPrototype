@@ -1,15 +1,15 @@
 <template>
   <form v-if="!userStore.user" @submit="submitCreateUserForm" class="flex flex-col gap-1">
     <label for="username" class="text-crt-4">Username:</label>
-    <input type="text" class="border-4 bg-crt-0 border-crt-4 px-3 text-white" id="username" v-model="username" placeholder="Pick a username" required>
+    <input type="text" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" id="username" v-model="username" placeholder="Pick a username" required>
     
     <label for="email" class="text-crt-4">Email:</label>
-    <input type="email" class="border-4 bg-crt-0 border-crt-4 px-3 text-white" placeholder="Your email address" id="email" v-model="email" required>
+    <input type="email" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" placeholder="Your email address" id="email" v-model="email" required>
     
     <label for="password" class="text-crt-4">Password:</label>
-    <input type="password" class="border-4 bg-crt-0 border-crt-4 px-3 text-white" id="password" v-model="password" required>
+    <input type="password" class="border-b-4 bg-crt-0 border-crt-4 mb-8 text-white" id="password" v-model="password" required>
     
-    <button type="submit" class="w-full bg-black text-white py-4 rounded mt-4">Submit</button>
+    <button type="submit" class="w-full bg-crt-9 text-white py-2 mt-4">Submit</button>
   </form>
 </template>
 

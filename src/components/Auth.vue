@@ -5,8 +5,8 @@
     <div v-if="!userStore.user" class="h-full w-96 mx-auto flex flex-col justify-center">
       <!-- Two links to switch between create account and login -->
       <div class="flex flex-row mb-8">
-        <div @click="showCreateForm" class="cursor-pointer w-1/2 rounded-l-lg border-r-0 border-gray-200 border text-black text-center py-2" :class="loggedout ? 'text-black' : 'bg-black text-white'">Create Account</div>
-        <div @click="showLoginForm" class="cursor-pointer w-1/2 rounded-r-lg border-gray-200 border text-center py-2" :class="loggedout ? 'bg-black text-white' : 'text-black'">Login</div>
+        <div @click="showCreateForm" class="cursor-pointer w-1/2 border-r-0 border-crt-4 border-4 text-black text-center py-2 text-white" :class="loggedout ? 'bg-crt-4' : ''">Create Account</div>
+        <div @click="showLoginForm" class="cursor-pointer w-1/2 border-crt-4 border-4 border text-center py-2 text-white" :class="loggedout ? '' : 'bg-crt-4'">Login</div>
       </div>
 
       <div v-if="notification && response && !response.ok">
