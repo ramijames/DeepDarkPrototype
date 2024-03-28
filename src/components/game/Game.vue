@@ -1,14 +1,15 @@
 <template>
   <main class="relative w-full h-full flex flex-row gap-4">
     <!-- Check if the user is logged in -->
-    <div v-if="userStore.user" class="relative border-4 b-crt-4 h-full w-1/5">
-      <div class="p-6">
-        <div class="text-crt-4">Hello, {{ userStore.user.username }}</div>
-        <Portal />
-      </div>
+    <div v-if="userStore.user" class="relative b-crt-4 h-full w-60">
+      <section class=" w-full border-4 b-crt-4 text-center flex flex-col justify-between min-h-44">
+        character view
+        <div class="text-white text-base text-center bg-crt-4">{{ userStore.user.username }}</div>
+      </section>  
+      <Portal />
       <LogOut />
     </div>
-    <div v-if="userStore.user" class="flex flex-col text-white text-center p-6 w-full h-full border-8 border-crt-4 border-double justify-center h-full">
+    <div v-if="userStore.user" class="w-full h-full border-8 border-crt-4 border-double">
       <router-view></router-view>
       <!-- Home view. Will show: 
       <ul class="w-44 mx-auto text-left">
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-import { watch } from 'vue';
+import { watch, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/store.js';
 import Portal from '../Portal.vue';
@@ -42,7 +43,24 @@ export default {
   },
   setup() {
     const userStore = useUserStore();
+    const sessionId = userStore.getSessionId();
     const router = useRouter();
+
+    const fetchUser = async () => {
+      const response = await fetch('http://localhost:3000/auth/current', {
+        headers: {
+          'Authorization': `Bearer ${sessionId}`
+        },
+        credentials: 'include'
+      });
+      if (!response.ok) {
+        throw new Error('Failed to fetch user');
+      }
+      const user = await response.json();
+      userStore.setUser(user);
+    };
+
+    onMounted(fetchUser);
 
     watch(() => userStore.user, (user) => {
       if (user) {

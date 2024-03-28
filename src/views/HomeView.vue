@@ -3,7 +3,7 @@ import MapGenerator from '../components/MapGenerator.vue';
 </script>
 
 <template>
-  <main >
+  <main class="">
     <h1 class="p-6 text-2xl w-full text-center">Map test</h1>
     <MapGenerator />
   </main>

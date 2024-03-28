@@ -1,12 +1,10 @@
 <template>
-  <nav class="text-white">
-    <ul v-for="item in portal" :key="item.name">
-      <li>
-        <a :href="item.href">{{ item.name }}</a>
-        <!-- <p>{{ item.description }}</p> -->
-      </li>
-    </ul>
-  </nav>
+  <section id="portal">
+    <nav class="text-white my-6">
+      <a v-for="item in portal" :key="item.name" class="block px-2 hover:bg-crt-4" :href="item.href" >{{ item.name }}</a>
+      <!-- <p>{{ item.description }}</p> -->
+    </nav>
+  </section>
 </template>
 
 <script setup>
